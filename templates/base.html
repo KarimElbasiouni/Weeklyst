@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weeklyst</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
+</head>
+<body>
+    <div style = 'margin-top: 50px;' class = "ui container">
+    <h1  class = 'ui center aligned header'>Weeklyst</h1>
+
+    <form class = 'ui form' action="/add"  method="post">
+
+        <div style = 'margin-left: 50px;' class = "field">
+            <label for="title">Task</label>
+            <input type="text" name="title" placeholder="Enter task...">
+            <br>
+            <button class = "ui blue button" type="submit">Add</button>
+        </div>
+    </div>   
+    </form>
+    {% for Task in task_list %}
+    <div class="ui segment">
+        <p class="ui big header">{{ Task.id }} ] {{Task.title}}</p>
+        {% if Task.complete == False %}
+            <span class = 'ui grey label'> Not Complete </span>
+        {% else %}
+            <span class = 'ui green label'> Complete </span>
+        {% endif %}
+
+        <a class = "ui blue button" href="/update/{{ Task.id }}">Update</a>
+        <a class = "ui red button" href="/delete/{{ Task.id }}">Delete</a>
+    </div>
+    {% endfor %}
+    
+</body>
+</html>
